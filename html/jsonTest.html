@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON Test</title>
+	<script src="jquery.js"></script>
+	<script>
+
+		function submitData(){
+			var firstName = $("#inputFirstName").val();
+			var lastName = $("#inputLastName").val();
+
+			jsonObject = {
+				"firstName": "",
+				"lastName": ""
+			}
+
+			jsonObject.firstName = firstName;
+			jsonObject.lastName = lastName;
+
+			var str = JSON.stringify(jsonObject);
+			alert(str);
+			console.log(str);
+			document.write(str);
+		}
+
+		
+		$(document).ready(function(){
+
+		});
+
+	</script>
+</head>
+<body>
+
+	<input type="text" name="firstName" id="inputFirstName" placeholder="Enter First Name">
+	<input type="text" name="lastName" id="inputLastName" placeholder="Enter Last Name">
+	<input type="submit" name="submitData" id="btnSubmit" value="SUBMIT DATA" onclick="submitData()">
+
+</body>
+</html>

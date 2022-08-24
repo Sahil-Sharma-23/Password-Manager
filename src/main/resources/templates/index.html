@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JSON Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+		function submitData(){
+<!--			var formData = JSON.stringify($("#formID").serializeArray());-->
+            $.ajax({
+                type: "POST",
+                url: "/add-new-user",
+                data: {
+                    "firstName": "Stem",
+                    "lastName": "Sarman",
+                    "username": "stemsaraman",
+                    "emailID": "rohit@gmail.com",
+                    "age": 25
+                },
+                success: function(){
+                    alert("Success");
+                },
+                dataType: "json",
+                contentType : "application/json"
+            });
+		}
+
+		$(document).ready(function(){
+			$("#btnSubmit").click(function(){
+				submitData();
+			});
+		});
+
+
+	</script>
+</head>
+<body>
+<form id="formID" method="post">
+    <input type="text" name="firstName" id="inputFirstName" placeholder="Enter First Name">
+    <br><br>
+    <input type="text" name="lastName" id="inputLastName" placeholder="Enter Last Name">
+    <br><br>
+    <input type="text" name="username" id="inputUsername" placeholder="Enter username">
+    <br><br>
+    <input type="email" name="emailID" id="inputEmail" placeholder="Enter Email ID">
+    <br><br>
+    <input type="number" name="age" id="inputAge" placeholder="Enter Age">
+    <br><br>
+    <input type="submit" name="submitData" id="btnSubmit" value="SUBMIT DATA">
+</form>
+</body>
+</html>
