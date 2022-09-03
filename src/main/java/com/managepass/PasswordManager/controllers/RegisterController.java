@@ -4,12 +4,12 @@ import com.managepass.PasswordManager.model.User;
 import com.managepass.PasswordManager.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/register")
 public class RegisterController {
 
     @Autowired
@@ -26,16 +26,16 @@ public class RegisterController {
     }
 
     @GetMapping("/get-user")
-    public Optional<User> getUser(@RequestParam String username){
-        return registerService.getUser(username);
+    public Optional<User> getUser(@RequestParam Long id){
+        return registerService.getUser(id);
     }
 
     @DeleteMapping("/delete-user")
-    public String deleteUser(@RequestParam String username){
-        return registerService.deleteUser(username);
+    public String deleteUser(@RequestParam Long id){
+        return registerService.deleteUser(id);
     }
 
-    @PatchMapping("update-user")
+    @PatchMapping("/update-user")
     public String updateUser(@RequestBody User user){
         return registerService.updateUser(user);
     }

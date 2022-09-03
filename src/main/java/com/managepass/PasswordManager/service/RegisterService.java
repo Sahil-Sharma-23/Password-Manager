@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface RegisterService {
     public User createNewUser(User user);
-    public Optional<User> getUser(String username);
+    public Optional<User> getUser(Long id);
     public List<User> getAllUsers();
-    public String deleteUser(String username);
+    public String deleteUser(Long id);
     public String updateUser(User user);
 }

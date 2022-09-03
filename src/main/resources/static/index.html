@@ -1,40 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <title>JSON Test</title>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
-		function submitData(){
-<!--			var formData = JSON.stringify($("#formID").serializeArray());-->
-            $.ajax({
-                type: "POST",
-                url: "/add-new-user",
-                data: {
-                    "firstName": "Stem",
-                    "lastName": "Sarman",
-                    "username": "stemsaraman",
-                    "emailID": "rohit@gmail.com",
-                    "age": 25
-                },
-                success: function(){
-                    alert("Success");
-                },
-                dataType: "json",
-                contentType : "application/json"
-            });
-		}
-
 		$(document).ready(function(){
+		    alert("JQUERY is Working");
+
 			$("#btnSubmit").click(function(){
-				submitData();
+				$.ajax({
+				url:'/add-new-user',
+				data:{
+
+                    "firstName":"jquery",
+                    "lastName":"JS",
+                    "username":"jquery.js",
+                    "emailID":"jquery@js.com",
+                    "password":"root"
+                },
+				type:"POST",
+				contentType: 'application/json',
+				dataType: 'json',
+				processData: false,
+				success:function(response){
+					alert(response);
+				}
+			});
 			});
 		});
-
-
 	</script>
 </head>
 <body>
-<form id="formID" method="post">
+<form id="formID" method="post" action="/add-new-user">
     <input type="text" name="firstName" id="inputFirstName" placeholder="Enter First Name">
     <br><br>
     <input type="text" name="lastName" id="inputLastName" placeholder="Enter Last Name">

@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -19,14 +18,7 @@ public class RegisterServiceImpl implements RegisterService {
      * @return : the entity which is written to the database.
      */
     public User createNewUser(User user) {
-        String newEnteredUsername = user.getUsername();
-        Optional<User> optionalUserUsername = userRepository.findById(newEnteredUsername);
-        // Validation of the username.
-        if (optionalUserUsername.get().equals(newEnteredUsername)){
-            return optionalUserUsername.get();
-        } else {
-            return userRepository.save(user);
-        }
+        return userRepository.save(user);
     }
 
     /**
@@ -35,8 +27,8 @@ public class RegisterServiceImpl implements RegisterService {
      *          username must not be null.
      * @return : the entity which is written to the database.
      */
-    public Optional<User> getUser(String username) {
-        return userRepository.findById(username);
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
     }
 
     /**
@@ -49,12 +41,12 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
      * Deletes the record saved with the username provided.
-     * @param username - must not be null.
+     * @param id - must not be null.
      * @return : String message whether the record is deleted or not.
      */
-    public String deleteUser(String username){
-        if (userRepository.existsById(username)){
-            userRepository.deleteById(username);
+    public String deleteUser(Long id){
+        if (userRepository.existsById(id)){
+            userRepository.deleteById(id);
             return "Record Deleted";
         } else {
             return "Record does not exist!";
@@ -63,12 +55,12 @@ public class RegisterServiceImpl implements RegisterService {
 
     /**
      * Checks and updates the requested record with the new record.
-     * @param user - should not be null and must contain an username which already exist.
+     * @param user - should not be null and must contain a username which already exist.
      * @return : String message whether the record is updated or not.
      */
     public String updateUser(User user) {
-        Optional<User> optionalUserToBeUpdated = userRepository.findById(user.getUsername());
-        if (optionalUserToBeUpdated.isPresent()){
+        Optional<User> optionalUserToBeUpdated = userRepository.findById(user.getId());
+        if (optionalUserToBeUpdated.isPresent()) {
             User finalUser = optionalUserToBeUpdated.get();
             userRepository.save(user);
             return "Record Updated!";
